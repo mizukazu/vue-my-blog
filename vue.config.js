@@ -9,7 +9,7 @@ module.exports = {
   chainWebpack: (config) => {
     config.module
       .rule("text")
-      .test(/\.txt$/i)
+      .test([/\.txt$/i, /\.md$/i])
       .use("raw-loader")
       .loader("raw-loader")
       .end();

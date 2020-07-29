@@ -36,15 +36,6 @@
               </v-list-item>
             </v-list-group>
           </template>
-          <!-- <v-list-item v-for="navList in navLists" :key="navList.name" :to="navList.link">
-            <v-list-item-icon>
-              <v-icon>{{ navList.icon }}</v-icon>
-            </v-list-item-icon>
-
-            <v-list-item-content>
-              <v-list-item-title>{{ navList.name }}</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item> -->
         </v-list>
 
       </v-container>
@@ -53,9 +44,9 @@
 
     <v-app-bar app dark>
       <v-app-bar-nav-icon @click="drawer=!drawer"></v-app-bar-nav-icon>
-      <v-toobar-title class="pl-2">
+      <v-toolbar-title class="pl-2">
         <router-link to="/" class="site-title">Vueで自作ブログ</router-link>
-      </v-toobar-title>
+      </v-toolbar-title>
       <v-spacer></v-spacer>
     </v-app-bar>
 
@@ -74,16 +65,18 @@
 
 <script>
 import 'normalize.css'
+// import { VueLoading } from 'vue-loading-template'
 
 export default {
   name: 'App',
-
   components: {
+    // VueLoading
   },
 
   data () {
     return {
       drawer: null,
+      loading: true,
       result: [],
       navLists: [
         {
@@ -113,11 +106,17 @@ export default {
         }
       ]
     }
+  },
+  mounted () {
   }
 }
 </script>
 
 <style>
+.loading {
+  position: absolute;
+  top: 10%;
+}
 .site-title {
   color: #fff !important;
   text-decoration: none;
