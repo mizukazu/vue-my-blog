@@ -1,26 +1,41 @@
 <template>
   <v-app>
     <v-container>
-      Post!
+     <div v-html="convertMd()" />
     </v-container>
   </v-app>
 </template>
 
 <script>
+// import VueMarkdown from 'vue-markdown'
+import marked from 'marked'
 import md from '../assets/data/post/test.md'
 
 export default {
-  name: 'Home',
+  name: 'Post',
   components: {
-    // Test
+    // VueMarkdown
   },
   data () {
     return {
-      col: '12'
+      col: '12',
+      md: md,
+      postInfo: ''
     }
   },
   created () {
-    console.log(md)
+    const textArray = md.split('\n')
+
+    this.postInfo = textArray.filter(x => {
+      if (x.includes('date') || x.includes('title')) {
+        return x
+      }
+    })
+  },
+  methods: {
+    convertMd () {
+      return marked(this.md)
+    }
   }
 }
 </script>

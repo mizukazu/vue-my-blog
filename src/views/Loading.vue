@@ -2,7 +2,7 @@
   <div v-show="loading">
     <div class="fullview">
       <div class="loading-spacer"></div>
-      <vue-loading 
+      <vue-loading
         type="spiningDubbles"
         color="#aaa"
         :size="{ width: '100px', height: '100px' }"
@@ -18,8 +18,8 @@ import { VueLoading } from 'vue-loading-template'
 export default {
   name: 'loading',
   components: {
-    VueLoading,
-  },
+    VueLoading
+  }
 
 }
 </script>
