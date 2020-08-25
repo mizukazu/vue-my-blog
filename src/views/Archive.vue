@@ -8,7 +8,7 @@
 
 <script>
 export default {
-  name: 'Archive',
+  name: 'archive',
   components: {
     // Test
   },

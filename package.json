@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build": "vue-cli-service build & npm run post_list",
     "lint": "vue-cli-service lint",
-    "sample": "node src/assets/scripts/script.js"
+    "post_list": "node src/assets/scripts/script.js"
   },
   "dependencies": {
     "core-js": "^3.6.5",
@@ -30,6 +30,7 @@
     "eslint-plugin-standard": "^4.0.0",
     "eslint-plugin-vue": "^6.2.2",
     "grob": "^1.0.0",
+    "jsdom": "^16.4.0",
     "markdown-to-vue-loader": "^2.0.0",
     "marked": "^1.1.1",
     "node-sass": "^4.12.0",

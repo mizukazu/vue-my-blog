@@ -2,28 +2,20 @@
   <v-app>
     <v-container>
       <v-row>
-        <v-col v-bind:cols="col" sm="6" lg="4" v-for="n in 20" :key="n">
-          <v-card class="mx-auto" max-width="400" to="/post">
+        <v-col v-bind:cols="col" sm="6" lg="4" v-for="(post, index) in postData" :key="index">
+          <router-link :to="{ name:'post', params:{ name: post.title }}" class="card-link">
+            <v-card class="mx-auto" max-width="400">
             <v-img class="white--text align-end" height="200px" src="https://cdn.vuetifyjs.com/images/cards/docks.jpg">
-              <v-card-title>Top 10 Australian beaches</v-card-title>
+              <v-card-title>{{ post.title }}</v-card-title>
             </v-img>
 
-            <v-card-subtitle class="pb-0">Number 10</v-card-subtitle>
+            <v-card-subtitle class="pb-0">{{ post.date }}</v-card-subtitle>
 
             <v-card-text class="text--primary">
-              <div>Whitehaven Beach</div>
-              <div>Whitsunday Island, Whitsunday Islands</div>
+              <div></div>
             </v-card-text>
-            <!-- <v-card-actions>
-              <v-btn color="orange" text>
-                Share
-              </v-btn>
-
-              <v-btn color="orange" text>
-                Explore
-              </v-btn>
-            </v-card-actions> -->
           </v-card>
+          </router-link>
         </v-col>
       </v-row>
     </v-container>
@@ -31,18 +23,29 @@
 </template>
 
 <script>
+import postData from '../assets/data/post.json'
+// import postList from '../assets/data/post_list.json'
+// const postPath = '../assets/data/post/'
 export default {
-  name: 'Home',
+  name: 'home',
   components: {
-    // Test
   },
   data () {
     return {
-      col: '12'
+      col: '12',
+      postData: postData
     }
+  },
+  created () {
+    // console.log(postData[2].content)
+  },
+  methods: {
   }
 }
 </script>
 
 <style lang="scss">
+.card-link {
+  text-decoration: none;
+}
 </style>

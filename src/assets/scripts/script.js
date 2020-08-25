@@ -1,44 +1,89 @@
 const fs = require('fs');
+const path = require('path');
+const jsdom = require('jsdom');
+const { JSDOM } = jsdom;
 const marked = require('marked');
-const post = '../data/post/test.md';
+const postPath = './src/assets/data/post.json';
+const postListPath = './src/assets/data/post_list.json';
+const postDirPath = './src/assets/data/post';
 
-// const md = marked(test);
+// ファイルの一覧を取得
+const fileList = getFileList(postDirPath);
 
-const data = await readFile(post);
+// 記事データから必要な情報を抽出
+const postListJson = [];
+const postJson = [];
+fileList.forEach(file => {
+  // markdown形式のファイルをHTMLに変換
+  const data = marked(readFile(postDirPath + '/' + file));
+  const dom = new JSDOM(data);
+  const postDate = data.match(/(\d{4})\/(\d{2})\/(\d{2})/)[0];
+  const postTitle = dom.window.document.querySelector('h1').textContent;
+  postJson.push({ "date": postDate, "title": postTitle, "content": data, "fileName": file });
+  postListJson.push({ "date": postDate, "title": postTitle, "fileName": file });
+})
 
-console.log(data);
+// 記事データのJSONを作成
+writeFile(postPath, JSON.stringify(postJson, null, '\t'));
 
-async function readFile(file) {
-  return new Promise((resolve, reject) => {
-    fs.readFile(file, {encoding: 'utf8'}, (err, data) => {
-      if (err) {
+// 記事リストのJSONを作成
+writeFile(postListPath, JSON.stringify(postListJson, null, '\t'));
 
-        
-        reject(err);
-      }
-      resolve(data);
-    });
+/**
+ * ファイルを同期的に読み込む関数(fs.readFileSyncをラップしたもの)
+ * @param { String } path 
+ * @return { String }
+ */
+function readFile(path) {
+  try {
+    if (fs.statSync(path)) {
+      return fs.readFileSync(path, 'utf8');
+    } else {
+      console.log('ファイルが存在しません。');
+    }
+  } catch(err) {
+    console.error(err.message);
   }
-)};
+}
 
-// fs.readFile(post, {encoding: 'utf8'}, (err, data) => {
-//   if (err) {
-//     console.error(err.message);
-//     return;
+/**
+ * 
+ * @param { String } path 
+ * @param { String } data 
+ */
+function writeFile(path, data) {
+  try {
+    fs.writeFileSync(path, data);
+    console.log('ファイルへの書き込みが完了しました。');
+  } catch(err) {
+    console.error(err.message);
+  }
+}
+
+/**
+ * 指定したディレクトリのファイル一覧を同期的に取得する関数(fs.readdirSyncをラップしたもの)
+ * @param { String } dir 
+ * @return { String[] }
+ */
+function getFileList(dir) {
+  try {
+    if (fs.statSync(dir)) {
+      return fs.readdirSync(dir, 'utf8');
+    }
+  } catch(err) {
+    console.log('ディレクトリが存在しません。');
+    console.error(err.message);
+  }
+}
+
+// 後で非同期で実装するかも
+// async function readFile(file) {
+//   return new Promise((resolve, reject) => {
+//     fs.readFile(file, {encoding: 'utf8'}, (err, data) => {
+//       if (err) {     
+//         reject(err);
+//       }
+//       resolve(data);
+//     });
 //   }
-//   console.log(data);
-// })
-
-// const readFile = (file) => {
-//   fs.readFile(file, {encoding: 'utf8'}, (err, data) => {
-//     if (err) {
-//       console.error(err.message);
-//       return;
-//     }
-//     return data;
-//   })
-// }
-
-// const html = readFile(post);
-
-// console.log(html);
+// )};

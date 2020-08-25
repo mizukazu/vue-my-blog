@@ -10,22 +10,22 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'Home',
+    name: 'home',
     component: Home
   },
   {
     path: '/category',
-    name: 'Category',
+    name: 'category',
     component: Category
   },
   {
     path: '/archive',
-    name: 'Archive',
+    name: 'archive',
     component: Archive
   },
   {
-    path: '/post',
-    name: 'Post',
+    path: '/post/:name',
+    name: 'post',
     component: Post
   }
 ]

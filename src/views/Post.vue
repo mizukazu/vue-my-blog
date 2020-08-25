@@ -1,40 +1,32 @@
 <template>
   <v-app>
     <v-container>
-     <div v-html="convertMd()" />
+     <!-- <div v-html="convertMd()" /> -->
     </v-container>
   </v-app>
 </template>
 
 <script>
-// import VueMarkdown from 'vue-markdown'
-import marked from 'marked'
-import md from '../assets/data/post/test.md'
+// import marked from 'marked'
+// import postData from '../assets/data/post.json'
 
 export default {
-  name: 'Post',
+  name: 'post',
   components: {
-    // VueMarkdown
   },
   data () {
     return {
       col: '12',
-      md: md,
-      postInfo: ''
+      postData: ''
     }
   },
   created () {
-    const textArray = md.split('\n')
-
-    this.postInfo = textArray.filter(x => {
-      if (x.includes('date') || x.includes('title')) {
-        return x
-      }
-    })
+    // console.log(postData[0].title)
+    // this.$route.params.name
   },
   methods: {
     convertMd () {
-      return marked(this.md)
+      // return marked(this.md)
     }
   }
 }
