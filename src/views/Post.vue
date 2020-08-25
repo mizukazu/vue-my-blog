@@ -1,14 +1,14 @@
 <template>
   <v-app>
     <v-container>
-     <!-- <div v-html="convertMd()" /> -->
+     <div v-html="convertMd()" />
     </v-container>
   </v-app>
 </template>
 
 <script>
-// import marked from 'marked'
-// import postData from '../assets/data/post.json'
+import marked from 'marked'
+import postData from '../assets/data/post.json'
 
 export default {
   name: 'post',
@@ -17,16 +17,17 @@ export default {
   data () {
     return {
       col: '12',
-      postData: ''
+      postContent: ''
     }
   },
   created () {
-    // console.log(postData[0].title)
-    // this.$route.params.name
+    this.postContent = postData.find(x => x.title === this.$route.params.name).content
+    // const test = postData.find(x => x.title === this.$route.params.name).content
+    // console.log(test)
   },
   methods: {
     convertMd () {
-      // return marked(this.md)
+      return marked(this.postContent)
     }
   }
 }
