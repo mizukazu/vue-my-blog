@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build & npm run post_list",
+    "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "post_list": "node src/assets/scripts/script.js"
   },
