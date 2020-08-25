@@ -5,7 +5,7 @@ module.exports = {
       title: 'Vueで自作ブログ'
     }
   },
-  publicPath: '/',
+  publicPath: './',
   chainWebpack: (config) => {
     config.module
       .rule('text')
