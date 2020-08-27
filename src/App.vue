@@ -92,7 +92,8 @@ export default {
           lists: [
             { name: 'HTML', link: '/category/html' },
             { name: 'CSS', link: '/category/css' },
-            { name: 'JS', link: '/category/js' }
+            { name: 'JS', link: '/category/js' },
+            { name: 'php', link: '/category/php' }
           ]
         },
         {
@@ -101,7 +102,9 @@ export default {
           active: true,
           link: '/archive',
           lists: [
-            { name: '2020/07', link: '/archive/202007' }
+            { name: '2019/05', link: '/archive/201905' },
+            { name: '2020/07', link: '/archive/202007' },
+            { name: '2020/08', link: '/archive/202008' }
           ]
         }
       ]

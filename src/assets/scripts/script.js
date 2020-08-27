@@ -4,30 +4,25 @@ const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
 const marked = require('marked');
 const postPath = './src/assets/data/post.json';
-const postListPath = './src/assets/data/post_list.json';
 const postDirPath = './src/assets/data/post';
 
 // ファイルの一覧を取得
 const fileList = getFileList(postDirPath);
 
 // 記事データから必要な情報を抽出
-const postListJson = [];
 const postJson = [];
 fileList.forEach(file => {
   // markdown形式のファイルをHTMLに変換
   const data = marked(readFile(postDirPath + '/' + file));
   const dom = new JSDOM(data);
   const postDate = data.match(/(\d{4})\/(\d{2})\/(\d{2})/)[0];
+  const postCategory = data.split('\n')[1].slice(3).slice(0, -4);
   const postTitle = dom.window.document.querySelector('h1').textContent;
-  postJson.push({ "date": postDate, "title": postTitle, "content": data, "fileName": file });
-  postListJson.push({ "date": postDate, "title": postTitle, "fileName": file });
+  postJson.push({ "date": postDate, "title": postTitle, "content": data, "category": postCategory, "fileName": file });
 })
 
 // 記事データのJSONを作成
 writeFile(postPath, JSON.stringify(postJson, null, '\t'));
-
-// 記事リストのJSONを作成
-writeFile(postListPath, JSON.stringify(postListJson, null, '\t'));
 
 /**
  * ファイルを同期的に読み込む関数(fs.readFileSyncをラップしたもの)

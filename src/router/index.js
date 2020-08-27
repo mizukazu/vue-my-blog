@@ -14,12 +14,12 @@ const routes = [
     component: Home
   },
   {
-    path: '/category',
+    path: '/category/:category',
     name: 'category',
     component: Category
   },
   {
-    path: '/archive',
+    path: '/archive/:archive',
     name: 'archive',
     component: Archive
   },

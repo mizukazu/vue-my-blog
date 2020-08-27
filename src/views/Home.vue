@@ -10,6 +10,7 @@
             </v-img>
 
             <v-card-subtitle class="pb-0">{{ post.date }}</v-card-subtitle>
+            <v-card-subtitle class="pb-0">{{ post.category }}</v-card-subtitle>
 
             <v-card-text class="text--primary">
               <div></div>
@@ -24,8 +25,6 @@
 
 <script>
 import postData from '../assets/data/post.json'
-// import postList from '../assets/data/post_list.json'
-// const postPath = '../assets/data/post/'
 export default {
   name: 'home',
   components: {
@@ -37,7 +36,6 @@ export default {
     }
   },
   created () {
-    // console.log(postData[2].content)
   },
   methods: {
   }
