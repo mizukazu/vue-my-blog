@@ -58,7 +58,7 @@
 
     <v-footer app dark>
       <v-spacer></v-spacer>
-      <small>© 2020 Vueで自作ブログ All rights reserved.</small>
+      <small>© 2020-2021 Vueで自作ブログ All rights reserved.</small>
     </v-footer>
   </v-app>
 </template>

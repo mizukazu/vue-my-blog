@@ -28,7 +28,6 @@ import postData from '../assets/data/post.json'
 export default {
   name: 'category',
   components: {
-    // Test
   },
   data () {
     return {
